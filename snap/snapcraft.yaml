@@ -31,7 +31,7 @@ platforms:
 
 apps:
   rocm-validation-suite:
-    command: usr/sbin/rvs
+    command: opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin/rvs
     plugs:
       - opengl
       - home
@@ -43,27 +43,35 @@ package-repositories:
     components: [main]
     suites: [noble]
     key-id: CA8BB4727A47B4D09B4EE8969386B48A1A693C5C
-    url: https://repo.radeon.com/amdgpu/6.2/ubuntu
+    url: https://repo.radeon.com/amdgpu/${SNAPCRAFT_PROJECT_VERSION}/ubuntu
   - type: apt
     architectures: [amd64]
     components: [main]
     suites: [noble]
     key-id: CA8BB4727A47B4D09B4EE8969386B48A1A693C5C
-    url: https://repo.radeon.com/rocm/apt/6.2
+    url: https://repo.radeon.com/rocm/apt/${SNAPCRAFT_PROJECT_VERSION}
+    priority: 600
 
 parts:
   rocm-validation-suite:
     plugin: cmake
+    cmake-parameters:
+      - -DROCM_PATH=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
+      - -DCMAKE_INSTALL_PREFIX=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
+      - -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
     source: https://github.com/ROCm/ROCmValidationSuite.git
     source-type: git
     source-tag: rocm-${SNAPCRAFT_PROJECT_VERSION}
-    build-snaps:
-      - cmake
+    build-snaps: [cmake]
     build-packages:
       - libpci3
       - libpci-dev
       - doxygen
       - unzip
       - libyaml-cpp-dev
-      - rocblas
+      - rocm-core
+      - rocm-cmake
+      - hipcc
+      - hip-dev
+      - rocblas-dev
       - rocm-smi-lib
