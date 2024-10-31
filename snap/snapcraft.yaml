@@ -38,6 +38,8 @@ platforms:
 apps:
   rocm-validation-suite:
     command: opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin/rvs
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/amdgpu/lib/x86_64-linux-gnu:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib
     plugs:
       - opengl
       - home
