@@ -1,5 +1,6 @@
 name: rocm-validation-suite
 title: ROCm Validation Suite
+license: MIT
 version: 6.2.2
 summary: A system validation and diagnostics tool for AMD GPUs
 description: |
