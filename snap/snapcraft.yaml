@@ -45,6 +45,10 @@ apps:
       - opengl
       - home
       - removable-media
+      - hardware-observe
+      - system-observe
+      - process-control
+      - power-control
 
 package-repositories:
   - type: apt
