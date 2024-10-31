@@ -51,7 +51,7 @@ apps:
       - power-control
       - network-control
       - firewall-control
-      - netwlink-audit
+      - netlink-audit
       - netlink-connector
 
 package-repositories:
