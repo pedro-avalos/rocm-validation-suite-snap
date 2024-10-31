@@ -79,12 +79,16 @@ parts:
       - rocm-cmake
       - hipcc
       - hip-dev
+      - hiprand
       - hiprand-dev
+      - rocrand
       - rocrand-dev
+      - rocblas
       - rocblas-dev
       - rocm-llvm
       - rocm-llvm-dev
       - rocm-device-libs
+      - rocm-smi-lib
     stage-packages:
       - rocm-smi-lib
       - rocrand
