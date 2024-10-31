@@ -50,6 +50,9 @@ apps:
       - process-control
       - power-control
       - network-control
+      - firewall-control
+      - netwlink-audit
+      - netlink-connector
 
 package-repositories:
   - type: apt
