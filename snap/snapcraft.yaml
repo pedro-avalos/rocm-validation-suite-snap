@@ -22,6 +22,11 @@ description: |
   may have a set of options that it defines and a configuration file that
   supports its execution.
 
+website: https://github.com/ROCm/ROCmValidationSuite
+contact: https://github.com/pedro-avalos/rocm-validation-suite-snap/issues
+issues: https://github.com/pedro-avalos/rocm-validation-suite-snap/issues
+source-code: https://github.com/ROCm/ROCmValidationSuite
+
 base: core24
 grade: stable
 confinement: strict
