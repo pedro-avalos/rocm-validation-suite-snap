@@ -49,6 +49,7 @@ apps:
       - system-observe
       - process-control
       - power-control
+      - network-control
 
 package-repositories:
   - type: apt
