@@ -39,13 +39,14 @@ apps:
   rocm-validation-suite:
     command: opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin/rvs
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/amdgpu/lib/x86_64-linux-gnu:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib
       PATH: $PATH:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin
     plugs:
       - opengl
       - home
       - removable-media
       - hardware-observe
+      - network-bind
       - system-observe
       - process-control
       - power-control
@@ -53,6 +54,18 @@ apps:
       - firewall-control
       - netlink-audit
       - netlink-connector
+
+plugs:
+  gpu-2404:
+    interface: content
+    target: $SNAP/gpu-2404
+    default-provider: mesa-2404
+
+layout:
+  /usr/share/libdrm:
+    bind: $SNAP/gpu-2404/libdrm
+  /usr/share/drirc.d:
+    symlink: $SNAP/gpu-2404/drirc.d
 
 package-repositories:
   - type: apt
@@ -71,41 +84,20 @@ package-repositories:
 
 parts:
   rocm-validation-suite:
-    plugin: cmake
-    cmake-parameters:
-      - -DROCM_PATH=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
-      - -DCMAKE_INSTALL_PREFIX=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
-      - -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
-    source: https://github.com/ROCm/ROCmValidationSuite.git
-    source-type: git
-    source-tag: rocm-${SNAPCRAFT_PROJECT_VERSION}
-    build-snaps: [cmake]
-    build-packages:
-      - libpci3
-      - libpci-dev
-      - doxygen
-      - unzip
-      - libyaml-cpp-dev
-      - rocm-core
-      - rocm-cmake
-      - hipcc
-      - hip-dev
-      - hiprand
-      - hiprand-dev
-      - rocrand
-      - rocrand-dev
-      - rocblas
-      - rocblas-dev
-      - rocm-llvm
-      - rocm-llvm-dev
-      - rocm-device-libs
-      - rocm-smi-lib
+    plugin: nil
     stage-packages:
       - rocm-smi-lib
       - rocrand
       - rocblas
       - hiprand
-      - libnuma1
-      - libpci3
-      - libyaml-cpp0.8
-      - libdrm-amdgpu-amdgpu1
+      - rocm-validation-suite
+    stage:
+      - -opt/amdgpu/lib/x86_64-linux-gnu/libdrm.so*
+      - -opt/amdgpu/lib/x86_64-linux-gnu/libdrm_amdgpu.so*
+      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/libhiprtc.so*
+      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/liboam.so*
+      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/libncurses.so*
+      - -usr/lib/x86_64-linux-gnu/libncurses.so*
+      - -usr/lib/x86_64-linux-gnu/libform.so*
+      - -usr/lib/x86_64-linux-gnu/libmenu.so*
+      - -usr/lib/x86_64-linux-gnu/libpanel.so*
