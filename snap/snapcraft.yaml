@@ -46,15 +46,11 @@ apps:
       - opengl
       - home
       - removable-media
-      - hardware-observe
-      - network-bind
-      - system-observe
+      - hardware-observe  # TODO: Request auto-connect
       - process-control
       - power-control
       - network-control
-      - firewall-control
-      - netlink-audit
-      - netlink-connector
+      - network-bind
 
 package-repositories:
   - type: apt
