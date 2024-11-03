@@ -41,6 +41,7 @@ apps:
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib
       PATH: $PATH:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin
+    extensions: [gnome]
     plugs:
       - opengl
       - home
@@ -54,18 +55,6 @@ apps:
       - firewall-control
       - netlink-audit
       - netlink-connector
-
-plugs:
-  gpu-2404:
-    interface: content
-    target: $SNAP/gpu-2404
-    default-provider: mesa-2404
-
-layout:
-  /usr/share/libdrm:
-    bind: $SNAP/gpu-2404/libdrm
-  /usr/share/drirc.d:
-    symlink: $SNAP/gpu-2404/drirc.d
 
 package-repositories:
   - type: apt
@@ -84,20 +73,31 @@ package-repositories:
 
 parts:
   rocm-validation-suite:
-    plugin: nil
+    plugin: cmake
+    cmake-parameters:
+      - -DROCM_PATH=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
+      - -DCMAKE_INSTALL_PREFIX=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
+      - -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}
+    source: https://github.com/ROCm/ROCmValidationSuite.git
+    source-type: git
+    source-tag: rocm-${SNAPCRAFT_PROJECT_VERSION}
+    build-snaps: [cmake]
+    build-packages:
+      - libpci3
+      - libpci-dev
+      - doxygen
+      - libyaml-cpp-dev
+      - unzip
+      - rocm-dev
+      - rocblas-dev
+      - rocrand-dev
+      - hiprand-dev
     stage-packages:
+      - libyaml-cpp0.8
       - rocm-smi-lib
-      - rocrand
       - rocblas
+      - rocrand
       - hiprand
-      - rocm-validation-suite
     stage:
       - -opt/amdgpu/lib/x86_64-linux-gnu/libdrm.so*
       - -opt/amdgpu/lib/x86_64-linux-gnu/libdrm_amdgpu.so*
-      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/libhiprtc.so*
-      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/liboam.so*
-      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/libncurses.so*
-      - -usr/lib/x86_64-linux-gnu/libncurses.so*
-      - -usr/lib/x86_64-linux-gnu/libform.so*
-      - -usr/lib/x86_64-linux-gnu/libmenu.so*
-      - -usr/lib/x86_64-linux-gnu/libpanel.so*
