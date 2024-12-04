@@ -62,13 +62,13 @@ package-repositories:
     components: [main]
     suites: [noble]
     key-id: CA8BB4727A47B4D09B4EE8969386B48A1A693C5C
-    url: https://repo.radeon.com/amdgpu/${SNAPCRAFT_PROJECT_VERSION}/ubuntu
+    url: https://repo.radeon.com/amdgpu/latest/ubuntu
   - type: apt
     architectures: [amd64]
     components: [main]
     suites: [noble]
     key-id: CA8BB4727A47B4D09B4EE8969386B48A1A693C5C
-    url: https://repo.radeon.com/rocm/apt/${SNAPCRAFT_PROJECT_VERSION}
+    url: https://repo.radeon.com/rocm/apt/latest
     priority: 600
 
 parts:
