@@ -83,30 +83,30 @@ parts:
     source-tag: rocm-${SNAPCRAFT_PROJECT_VERSION}
     build-snaps: [cmake]
     build-packages:
-      - libpci3
-      - libpci-dev
       - doxygen
-      - libyaml-cpp-dev
-      - unzip
-      - rocm-dev
-      - rocblas-dev
-      - rocrand-dev
-      - hiprand-dev
       - hipblaslt-dev
+      - hiprand-dev
+      - libpci-dev
+      - libpci3
+      - libyaml-cpp-dev
+      - rocblas-dev
+      - rocm-dev
+      - rocrand-dev
+      - unzip
     stage-packages:
-      - libyaml-cpp0.8
-      - rocm-smi-lib
-      - rocblas
-      - rocrand
-      - hiprand
       - hipblaslt
+      - hiprand
+      - libyaml-cpp0.8
+      - rocblas
+      - rocm-smi-lib
+      - rocrand
     stage:
       - -opt/amdgpu
-      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/librocm-core.so*
-      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/liboam.so*
       - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/libhiprtc.so*
+      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/liboam.so*
+      - -opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib/librocm-core.so*
+      - -usr/include/ncursesw
       - -usr/lib/x86_64-linux-gnu/libform.so*
       - -usr/lib/x86_64-linux-gnu/libmenu.so*
-      - -usr/lib/x86_64-linux-gnu/libpanel.so*
       - -usr/lib/x86_64-linux-gnu/libncurses.so*
-      - -usr/include/ncursesw
+      - -usr/lib/x86_64-linux-gnu/libpanel.so*
