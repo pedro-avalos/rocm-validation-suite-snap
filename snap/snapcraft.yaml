@@ -50,7 +50,7 @@ apps:
       - opengl
       - home
       - removable-media
-      - hardware-observe  # TODO: Request auto-connect
+      - hardware-observe
       - process-control
       - power-control
       - network-control
