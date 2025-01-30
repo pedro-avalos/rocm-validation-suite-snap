@@ -53,8 +53,10 @@ apps:
       - hardware-observe
       - process-control
       - power-control
+      - network
       - network-control
       - network-bind
+      - system-observe
 
 package-repositories:
   - type: apt
@@ -96,6 +98,7 @@ parts:
     stage-packages:
       - hipblaslt
       - hiprand
+      - libproxy1v5
       - libyaml-cpp0.8
       - rocblas
       - rocm-smi-lib
