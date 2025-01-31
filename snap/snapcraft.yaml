@@ -41,7 +41,7 @@ platforms:
 
 apps:
   rocm-validation-suite:
-    command: bin/snapcraft-preload ${SNAP}/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin/rvs
+    command: bin/snapcraft-preload $SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin/rvs
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/lib
       PATH: $PATH:$SNAP/opt/rocm-${SNAPCRAFT_PROJECT_VERSION}/bin
