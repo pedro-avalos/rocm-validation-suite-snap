@@ -21,6 +21,9 @@
 
 <p align="center">Published for <img src="https://raw.githubusercontent.com/anythingcodes/slack-emoji-for-techies/gh-pages/emoji/tux.png" align="top" width="24" /> with 💝 by Snapcrafters</p>
 
+> [!NOTE]
+> This repository is being archived in favor of [canonical/rocm-validation-suite-snap](https://github.com/canonical/rocm-validation-suite-snap)
+
 ## Install
 
 ```shell
